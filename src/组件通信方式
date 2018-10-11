@@ -1,0 +1,70 @@
+以本demo为例
+
+一.props (src-todos)
+
+  a.在标签中通过:绑定事件事件监听<TodoHeader :addItem="addItem"/>
+
+  b.TodoHeader组件中接收
+
+    export default{
+      props: ['addItem']
+    }
+
+    或者
+
+    export default {
+      props:{
+        addItem: Function
+      }
+    }
+
+二.自定义事件
+    1.标签中绑定
+
+      a.在标签中通过@绑定事件事件监听<TodoHeader @addItem="addItem"/>
+
+      b.TodoHeader组件中通过this.$emit('方法名称',参数)调用
+
+    2.通过$on方式来进行绑定
+
+      a.标签<TodoHeader ref="header"/>
+
+      b.绑定事件
+        mounted(){
+          //TodoHeader标签绑定addItem事件
+          this.$refs.header.$on('addItem',this.addItem);
+        }
+
+      c.TodoHeader组件中通过this.$emit()调用
+
+3.消息发布/订阅
+
+    绑定事件      -->     订阅消息（subscribe）
+    触发事件      -->     发布消息（publish）
+
+  1.安装pubsub-js: npm install --save pubsub-js
+
+  2.订阅消息（App.vue）
+    import PubSub from 'pubsub-js'
+    export default {
+      mounted(){
+        //消息订阅
+        PubSub.subscribe('deleteItem',(msg,index) =>{
+          this.deleteItem(index);
+      })
+    }
+
+   3.发布消息（TodoItem.vue）
+   import PubSub from 'pubsub-js'
+   export default {
+     mounted(){
+       //发布订阅
+       PubSub.subscribe('deleteItem',(msg,index) =>{
+         //PubSub.publish('方法名称',参数)
+         PubSub.publish('deleteItem',index);
+     })
+   }
+
+注意：
+  1.自定义事件存在局限性：只能在父子组件中传递
+  2.消息发布/订阅方式解决了自定义事件的局限性，可以实现多级组件之间的函数传递

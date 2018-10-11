@@ -23,6 +23,7 @@
 </template>
 
 <script>
+  import PubSub from 'pubsub-js'
     export default {
       data(){
         return {
@@ -33,13 +34,13 @@
       props:{
         todo: Object,
         index: Number,
-        deleteItem: Function
       },
       methods:{
         deleteTodo(){
           const {todo,index} = this;
           if (window.confirm('确认删除'+ todo.title + '吗？')){
-            this.deleteItem(index);
+            //this.deleteItem(index);
+            PubSub.publish('deleteItem',index);
           }
         },
         handleEnter(isShow){

@@ -37,7 +37,7 @@
 
       c.TodoHeader组件中通过this.$emit()调用
 
-3.消息发布/订阅
+三.消息发布/订阅
 
     绑定事件      -->     订阅消息（subscribe）
     触发事件      -->     发布消息（publish）
@@ -65,6 +65,24 @@
      })
    }
 
+四.slot
+  以App.vue和TodoFooter.vue为例
+
+  1.将TodoFooter组件中的<input>和<button>用<slot name="xxx">代替，相当于提供了一个占位
+
+  2.修改App.vue
+    <todo-footer>
+      <div slot="xxx">
+      <div slot="yyy">
+    </todo-footer>
+
+  3.由于在子组件中使用<slot>，并且在父组件中使用<div slot="xxx" />来进行占位，则<div>中的
+
+    内容都是在父组件中进行编译，然后再插入子组件中，所以div中的计算属性，方法等都要写在父
+
+    组件中
+
 注意：
   1.自定义事件存在局限性：只能在父子组件中传递
   2.消息发布/订阅方式解决了自定义事件的局限性，可以实现多级组件之间的函数传递
+  3.slot中传递的是标签，而props、自定义事件和消息订阅发布都是传递的数据

@@ -1,12 +1,15 @@
 <template>
   <div class="todo-footer">
     <label>
-      <input type="checkbox" v-model="isAll" @click="selectAll(isAll)"/>
+      <!--<input type="checkbox" v-model="isAll"/>-->
+      <slot name="checkAll"></slot>
     </label>
     <span>
-          <span>已完成{{completed}}</span> / 全部{{allTodos}}
-        </span>
-    <button class="btn btn-danger" v-show="completed !== 0" @click="deleteComplete">清除已完成任务</button>
+        <!--<span>已完成{{completed}}</span> / 全部{{allTodos}}-->
+        <slot name="count"></slot>
+     </span>
+    <!--<button class="btn btn-danger" v-show="completed !== 0" @click="deleteComplete">清除已完成任务</button>-->
+    <slot name="clear"></slot>
   </div>
 </template>
 
@@ -42,10 +45,6 @@
         }
       },
       methods:{
-        selectAll(isAll){
-          this.selectAllTodos(!isAll);
-          this.isAll = !isAll;
-        },
         deleteComplete(){
           this.deleteCompleteTodo();
         }

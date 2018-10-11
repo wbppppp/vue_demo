@@ -22,11 +22,7 @@
       },
       data(){
         return {
-          todos:[
-            {title: '吃饭', complete: false},
-            {title: '睡觉', complete: true},
-            {title: '撸代码', complete: false}
-          ]
+          todos:JSON.parse(window.localStorage.getItem("todos_key") || '[]')
         }
       },
       methods:{
@@ -43,6 +39,15 @@
         //全选/全不选
         selectAllTodos(isAll){
           this.todos.forEach(todo => todo.complete = isAll);
+        }
+      },
+      watch:{
+        todos:{
+          deep: true, //深度监视
+          handler: function (newVal) {
+            //将最新的todos转为json格式的字符串保存
+            window.localStorage.setItem("todos_key",JSON.stringify(newVal));
+          }
         }
       }
     }

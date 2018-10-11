@@ -2,7 +2,8 @@
   <div class="todo-container">
     <div class="todo-wrap">
 
-      <TodoHeader :addItem="addItem"/>
+      <!--<TodoHeader @addItem="addItem"/>--> <!--TodoHeader标签绑定addItem事件监听-->
+      <TodoHeader ref="header"/>
       <TodoList :todos="todos" :deleteItem="deleteItem"/>
       <todo-footer :todos="todos" :deleteCompleteTodo="deleteCompleteTodo" :selectAllTodos="selectAllTodos"/>
 
@@ -19,6 +20,10 @@
         TodoHeader,
         TodoList,
         TodoFooter
+      },
+      mounted(){
+        //TodoHeader标签绑定addItem事件
+        this.$refs.header.$on('addItem',this.addItem);
       },
       data(){
         return {

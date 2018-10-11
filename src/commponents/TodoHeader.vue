@@ -6,9 +6,9 @@
 
 <script>
     export default {
-      props:{
+      /*props:{
         addItem: Function
-      },
+      },*/
       data(){
         return {
           title: ''
@@ -23,7 +23,9 @@
             }
 
             const todo = {title: title, complete: true};
-            this.addItem(todo);
+
+            //触发自定义事件
+            this.$emit('addItem',todo);
 
             this.title = "";
           }

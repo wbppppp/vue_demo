@@ -1,0 +1,28 @@
+一.vue-resource
+
+    1.安装插件库
+
+       npm install --save vue-resource
+
+    2.使用
+
+      this.$http.get(url)
+          .then(
+            res => {
+              //响应成功
+            },res => {
+              //响应失败
+
+            });
+
+二.axios
+
+  1.安装插件库
+
+    npm install --save axios
+
+  2.使用
+
+    axios.get(url)
+          .then(res => {})
+          .catch(error => {})

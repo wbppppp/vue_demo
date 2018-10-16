@@ -1,19 +1,18 @@
 <template>
-  <div class="container">
-    <Search />
-    <UsersMain />
+  <div>
+    <div v-if="!repoUrl">loading</div>
+    <div v-else>most start repo is <a :href="repoUrl">{{repoName}}</a></div>
   </div>
 </template>
 
 <script>
     import axios from 'axios'
-    import Search from './components/Search'
-    import Main from './components/Main'
-
     export default {
-      components: {
-        Search,
-        UsersMain: Main
+      data(){
+        return {
+          repoUrl: '',
+          repoName: ''
+        }
       },
       mounted(){
         const url = "https://api.github.com/search/repositories?q=v&sort=stars&order=desc";

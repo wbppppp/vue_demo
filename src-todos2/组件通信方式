@@ -60,8 +60,8 @@
      mounted(){
        //发布订阅
        PubSub.subscribe('deleteItem',(msg,index) =>{
-         //PubSub.publish('方法名称',参数)
-         PubSub.publish('deleteItem',index);
+         //do something
+         
      })
    }
 
